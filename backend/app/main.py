@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 # Tworzenie tabel
-Base.metadata.create_all(bind=engine)
+'''Base.metadata.create_all(bind=engine)'''
 
 app = FastAPI(title="Math Tasks API")
 
