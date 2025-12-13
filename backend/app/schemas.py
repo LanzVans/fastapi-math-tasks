@@ -2,27 +2,30 @@ from pydantic import BaseModel, field_validator
 
 class SubjectBase(BaseModel):
     name: str
-
-class SubjectCreate(SubjectBase):
-    pass
-
+    
 class Subject(SubjectBase):
     id: int
     class Config:
         orm_mode = True
+   
+class SubjectCreate(SubjectBase):
+    pass
+
+
 
 
 class CategoryBase(BaseModel):
     name: str
     subject_id: int
 
-class CategoryCreate(CategoryBase):
-    pass
-
 class Category(CategoryBase):
     id: int
     class Config:
         orm_mode = True
+
+class CategoryCreate(CategoryBase):
+    pass
+
 
 
 class TaskBase(BaseModel):
@@ -36,10 +39,11 @@ class TaskBase(BaseModel):
             return v.replace("\\", "\\\\")
         return v
 
-class TaskCreate(TaskBase):
-    pass
-
 class Task(TaskBase):
     id: int
     class Config:
         orm_mode = True
+
+class TaskCreate(TaskBase):
+    pass
+

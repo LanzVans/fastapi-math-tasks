@@ -13,6 +13,16 @@ def get_subjects(db: Session):
     return db.query(models.Subject).all()
 
 
+def delete_subjects(db: Session, id: int = None):
+    obj=db.query(models.Subject).filter(models.Subject.id == id).first()
+    print(obj)
+    if id:
+        db.delete(obj)
+        db.commit()
+       
+    return db.query(models.Subject).all()
+
+
 # CATEGORIES
 def create_category(db: Session, data: schemas.CategoryCreate):
     obj = models.Category(name=data.name, subject_id=data.subject_id)

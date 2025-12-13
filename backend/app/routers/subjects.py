@@ -12,3 +12,7 @@ def create_subject(subject: schemas.SubjectCreate, db: Session = Depends(get_db)
 @router.get("", response_model=list[schemas.Subject])
 def list_subjects(db: Session = Depends(get_db)):
     return crud.get_subjects(db)
+
+@router.delete("", response_model=list[schemas.Subject])
+def delete_subjects(id: int | None = None, db: Session = Depends(get_db)):
+    return crud.delete_subjects(db, id)

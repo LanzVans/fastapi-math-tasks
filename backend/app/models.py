@@ -32,6 +32,6 @@ class Task(Base):
     id = Column(Integer, primary_key=True, index=True)
     question = Column(String, nullable=False)      # obsługuje LaTeX
     answer = Column(String, nullable=False)
-
+    
     category_id = Column(Integer, ForeignKey("categories.id"))
     category = relationship("Category", back_populates="tasks")
