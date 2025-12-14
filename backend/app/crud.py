@@ -3,11 +3,12 @@ from fastapi import HTTPException, status
 from app import models, schemas
 
 # SUBJECTS
-def create_subject(db: Session, data: schemas.SubjectCreate):
-    obj = models.Subject(name=data.name)
-    db.add(obj)
+def create_subject(db: Session, data: list[schemas.SubjectCreate]):
+    obj = [models.Subject(**subject.model_dump()) for subject in data]
+    db.add_all(obj)
     db.commit()
-    db.refresh(obj)
+    for subject in obj:
+        db.refresh(subject)
     return obj
 
 def get_subjects(db: Session):
@@ -23,11 +24,12 @@ def delete_subject(db: Session, id: int = None):
 
 
 # CATEGORIES
-def create_category(db: Session, data: schemas.CategoryCreate):
-    obj = models.Category(name=data.name, subject_id=data.subject_id)
-    db.add(obj)
+def create_category(db: Session, data: list[schemas.CategoryCreate]):
+    obj = [models.Category(**category.model_dump()) for category in data ]
+    db.add_all(obj)
     db.commit()
-    db.refresh(obj)
+    for category in obj:
+        db.refresh(category)
     return obj
 
 def get_categories(db: Session, subject_id: int = None):
@@ -81,7 +83,7 @@ def delete_task (db: Session, id: int =None):
         )
     db.delete(obj)
     db.commit()
-    return db.query(models.Task).all
+    return db.query(models.Task).all()
             
             
         

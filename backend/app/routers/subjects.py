@@ -5,8 +5,9 @@ from app import crud, schemas
 
 router = APIRouter(prefix="/subjects", tags=["subjects"])
 
-@router.post("", response_model=schemas.Subject)
-def create_subject(subject: schemas.SubjectCreate, db: Session = Depends(get_db)):
+@router.post("", response_model=list[schemas.Subject])
+def create_subject(subject: list[schemas.SubjectCreate], db: Session = Depends(get_db)):
+    
     return crud.create_subject(db, subject)
 
 @router.get("", response_model=list[schemas.Subject])
