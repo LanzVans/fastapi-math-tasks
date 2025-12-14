@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel, field_validator
 
 class SubjectBase(BaseModel):
@@ -16,7 +17,7 @@ class SubjectCreate(SubjectBase):
 
 class CategoryBase(BaseModel):
     name: str
-    subject_id: int
+    subject_id: Optional[int] = None
 
 class Category(CategoryBase):
     id: int
@@ -31,7 +32,7 @@ class CategoryCreate(CategoryBase):
 class TaskBase(BaseModel):
     question: str
     answer: str
-    category_id: int
+    category_id: Optional[int] = None
 
     @field_validator("question", mode="before")
     def escape_latex(cls, v):

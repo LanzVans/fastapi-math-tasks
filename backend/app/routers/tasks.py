@@ -12,3 +12,7 @@ def create_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
 @router.get("", response_model=list[schemas.Task])
 def list_tasks(category_id: int | None = None, db: Session = Depends(get_db)):
     return crud.get_tasks(db, category_id)
+
+@router.delete("",response_model=list[schemas.Task])
+def delete_task(id: int | None = None, db: Session = Depends(get_db)):
+    return crud.delete_task(db, id)

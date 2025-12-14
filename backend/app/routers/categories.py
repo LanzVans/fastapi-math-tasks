@@ -12,3 +12,7 @@ def create_category(cat: schemas.CategoryCreate, db: Session = Depends(get_db)):
 @router.get("", response_model=list[schemas.Category])
 def list_categories(subject_id: int | None = None, db: Session = Depends(get_db)):
     return crud.get_categories(db, subject_id)
+
+@router.delete("",response_model=list[schemas.Category])
+def delete_category(id: int | None = None, db: Session = Depends(get_db)):
+    return crud.delete_categorie(db, id)
