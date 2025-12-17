@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
-from app import models, schemas
+from app.models import models
+from app.schemas import schemas
 
 # SUBJECTS
 def create_subject(db: Session, data: list[schemas.SubjectCreate]):
